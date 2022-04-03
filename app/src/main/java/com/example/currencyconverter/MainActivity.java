@@ -21,7 +21,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
+
 public class MainActivity extends AppCompatActivity {
+    TextView buyView = findViewById(R.id.textView);
+    TextView sellView = findViewById(R.id.textView2);
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... urls){
@@ -60,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 String br = String.valueOf(formatter.format(Integer.parseInt(sb[1])));
                 String[] ss = sv[1].split(",");
                 String sR = String.valueOf(formatter.format(Integer.parseInt(ss[1])));
-
+                buyView.setText(br);
+                sellView.setText(sR);
 
             }catch(Exception e){
                 e.printStackTrace();
