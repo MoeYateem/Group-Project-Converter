@@ -1,9 +1,9 @@
 package com.example.currencyconverter;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,14 +12,16 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.*;
+import java.math.BigDecimal;
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-    int sellRate;
-    int buyRate;
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... urls){
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
         }
+
+
         protected void onPostExecute(String values){
             super.onPostExecute(values);
 
@@ -63,11 +67,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+    DownloadTask first_api;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String url = "http://localhost/mobile/scrap.php";
+        first_api = new DownloadTask();
+        first_api.execute(url);
     }
+
+
     public void onClickConvert(View view) {
         TextView conversionTextView = findViewById(R.id.output);
         EditText lbpEditText = findViewById(R.id.lbp_edit_text);
@@ -84,9 +96,8 @@ public class MainActivity extends AppCompatActivity {
         else {
 
             String usdValue = usdEditText.getText().toString();
-            BigDecimal lbp = new BigDecimal(Double.parseDouble(usdValue) * buyRate);
+            BigDecimal lbp = new BigDecimal(Double.parseDouble(usdValue) * 22000);
             conversionTextView.setText(usdValue + "$ = " + String.valueOf(lbp) + "LBP");
         }
     }
-
 }
