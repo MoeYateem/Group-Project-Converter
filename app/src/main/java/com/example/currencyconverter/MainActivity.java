@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         EditText usdEditText = findViewById(R.id.usd_edit_text);
         if (!lbpEditText.getText().toString().equals("")) {
             String lbpValue = lbpEditText.getText().toString();
-            BigDecimal usd = new BigDecimal(Double.parseDouble(lbpValue) / sellRate);
+            BigDecimal usd = new BigDecimal(Double.parseDouble(lbpValue) / 20000);
             conversionTextView.setText(lbpValue + "LBP = " + String.valueOf(usd) + "$");
         }
         else if(lbpEditText.getText().toString().equals("") && usdEditText.getText().toString().equals("")) {
