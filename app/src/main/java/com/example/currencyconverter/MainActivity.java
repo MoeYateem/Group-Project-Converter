@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
     int sellRate;
@@ -43,6 +44,22 @@ public class MainActivity extends AppCompatActivity {
             }catch(Exception e){
                 e.printStackTrace();
                 return null;
+            }
+        }
+        protected void onPostExecute(String values){
+            super.onPostExecute(values);
+
+            try{
+                DecimalFormat formatter = new DecimalFormat("#,###");
+                String[] sv = values.split("]") ;
+                String[] sb =sv[0].split(",");
+                String br = String.valueOf(formatter.format(Integer.parseInt(sb[1])));
+                String[] ss = sv[1].split(",");
+                String sR = String.valueOf(formatter.format(Integer.parseInt(ss[1])));
+
+
+            }catch(Exception e){
+                e.printStackTrace();
             }
         }
 
