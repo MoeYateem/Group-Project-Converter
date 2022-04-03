@@ -1,17 +1,50 @@
 package com.example.currencyconverter;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     int sellRate;
     int buyRate;
+    public class DownloadTask extends AsyncTask<String, Void, String> {
+
+        protected String doInBackground(String... urls){
+            String result = "";
+            URL url;
+            HttpURLConnection http;
+
+            try{
+                url = new URL(urls[0]);
+                http = (HttpURLConnection) url.openConnection();
+
+                InputStream in = http.getInputStream();
+                InputStreamReader reader = new InputStreamReader(in);
+                StringBuilder s = new StringBuilder();
+                BufferedReader b = new BufferedReader(reader);
+                String l;
+                while((l=b.readLine())!=null){
+                    s.append(l+"\n");
+                }
+                b.close();
+                return s.toString();
+            }catch(Exception e){
+                e.printStackTrace();
+                return null;
+            }
+        }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
