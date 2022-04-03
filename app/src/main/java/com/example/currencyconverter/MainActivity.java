@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 String[] ss = sv[1].split(",");
                 String sR = String.valueOf(formatter.format(Integer.parseInt(ss[1])));
                 buyView.setText(br);
-                sellView.setText(sR);
+
+
 
             }catch(Exception e){
                 e.printStackTrace();
