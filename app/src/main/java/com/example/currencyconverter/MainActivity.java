@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... urls){ //HTTP Connection to API1
             String result = "";
             URL url;
-            HttpURLConnection http;
+            HttpURLConnection http; //Initializing the url connection
 
             try{
                 url = new URL(urls[0]);
