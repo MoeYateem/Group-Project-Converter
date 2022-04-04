@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         String url = "http://10.21.128.147/mobile/scrap.php";
         DownloadTask first_api = new DownloadTask();
         first_api.execute(url);
-        String Url_API = "http://192.168.0.119/intermidiate%20Currency%20Coverter/backend/APIs/db_api.php"; //api that sends the data to the DB
+        String Url_API = "http://10.21.128.147/mobile/api2.php";
         API_Add do_it = new API_Add();
         String str = "amount ,currency ,rate";
         do_it.execute(Url_API, str);
