@@ -110,6 +110,11 @@ public class MainActivity extends AppCompatActivity {
         String url = "http://10.21.128.147/mobile/scrap.php";
         DownloadTask first_api = new DownloadTask();
         first_api.execute(url);
+        String Url_API = "http://192.168.0.119/intermidiate%20Currency%20Coverter/backend/APIs/db_api.php"; //api that sends the data to the DB
+        API_Add do_it = new API_Add();
+        String str = "amount ,currency ,rate";
+        do_it.execute(Url_API, str);
+
 
 
 
@@ -123,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         EditText usdEditText = findViewById(R.id.usd_edit_text);
         if (!lbpEditText.getText().toString().equals("")) {
             String lbpValue = lbpEditText.getText().toString();
-            BigDecimal usd = new BigDecimal(Double.parseDouble(lbpValue) / 20000);
+            BigDecimal usd = new BigDecimal(Double.parseDouble(lbpValue) / b_Rate);
             conversionTextView.setText(lbpValue + "LBP = " + String.valueOf(usd) + "$");
         }
         else if(lbpEditText.getText().toString().equals("") && usdEditText.getText().toString().equals("")) {
@@ -133,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         else {
 
             String usdValue = usdEditText.getText().toString();
-            BigDecimal lbp = new BigDecimal(Double.parseDouble(usdValue) * 22000);
+            BigDecimal lbp = new BigDecimal(Double.parseDouble(usdValue) * s_Rate);
             conversionTextView.setText(usdValue + "$ = " + String.valueOf(lbp) + "LBP");
         }
     }
