@@ -27,14 +27,14 @@ import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
-    TextView BuyView;
+    TextView BuyView;//Initializing the views for the JSON Objects from the scrap API
     TextView SellView;
-    int b_Rate;
+    int b_Rate;//Initializing the variables that will hold the values of the json objects
     int s_Rate;
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
 
-        protected String doInBackground(String... urls){
+        protected String doInBackground(String... urls){ //HTTP Connection to API1
             String result = "";
             URL url;
             HttpURLConnection http;
