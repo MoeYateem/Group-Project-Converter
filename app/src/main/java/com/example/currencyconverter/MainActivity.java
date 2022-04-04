@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         DownloadTask first_api = new DownloadTask();
         first_api.execute(url);
         BuyView= findViewById(R.id.textView);
-
+        //BuyView.setText();
 
 
     }
