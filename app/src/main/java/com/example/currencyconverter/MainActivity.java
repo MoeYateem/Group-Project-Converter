@@ -9,9 +9,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -70,6 +74,32 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+    public class API_Add extends AsyncTask<String, String, String> {
+        HttpURLConnection http;
+        HttpURLConnection con;
+        URL url;
+        @Override
+        protected String doInBackground(String... params) {
+            String urlString = params[0]; // URL to call
+            String data = params[1];
+            OutputStream out = null;
+            try {
+                URL url = new URL(urlString);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("POST");
+                out = new BufferedOutputStream(con.getOutputStream());
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+                writer.write(data);
+                writer.flush();
+                writer.close();
+                out.close();
+                con.connect();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            return null;
+        }
     }
 
     @Override
