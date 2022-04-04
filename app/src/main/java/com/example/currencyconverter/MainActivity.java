@@ -23,10 +23,11 @@ import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
-    TextView buyView = findViewById(R.id.textView);
-    TextView sellView = findViewById(R.id.textView2);
+    TextView BuyView;
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
+        int b_Rate;
+        int s_Rate;
         protected String doInBackground(String... urls){
             String result = "";
             URL url;
@@ -38,50 +39,48 @@ public class MainActivity extends AppCompatActivity {
 
                 InputStream in = http.getInputStream();
                 InputStreamReader reader = new InputStreamReader(in);
-                StringBuilder s = new StringBuilder();
-                BufferedReader b = new BufferedReader(reader);
-                String l;
-                while((l=b.readLine())!=null){
-                    s.append(l+"\n");
+                int data = reader.read();
+
+                while( data != -1){
+                    char current = (char) data;
+                    result += current;
+                    data = reader.read();
+
                 }
-                b.close();
-                return s.toString();
             }catch(Exception e){
                 e.printStackTrace();
                 return null;
             }
+
+            return result;
         }
 
 
-        protected void onPostExecute(String values){
-            super.onPostExecute(values);
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
 
-            try{
-                DecimalFormat formatter = new DecimalFormat("#,###");
-                String[] sv = values.split("]") ;
-                String[] sb =sv[0].split(",");
-                String br = String.valueOf(formatter.format(Integer.parseInt(sb[1])));
-                String[] ss = sv[1].split(",");
-                String sR = String.valueOf(formatter.format(Integer.parseInt(ss[1])));
-                buyView.setText(br);
-                sellView.setText(sR);
-
-
-            }catch(Exception e){
+            try {
+                JSONObject json = new JSONObject(s);
+                b_Rate=json.getInt("buy_dude");
+                Log.i("blackMarketHigh", "" + b_Rate);
+                Log.i("blackMarketLow", "" + s_Rate);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
     }
-    DownloadTask first_api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String url = "http://localhost/mobile/scrap.php";
-        first_api = new DownloadTask();
+        String url = "http://10.21.128.147/mobile/scrap.php";
+        DownloadTask first_api = new DownloadTask();
         first_api.execute(url);
+        BuyView= findViewById(R.id.textView);
+//        BuyView.setText(b_Rate);
     }
 
 
