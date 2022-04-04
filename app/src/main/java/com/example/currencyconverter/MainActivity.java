@@ -41,15 +41,15 @@ public class MainActivity extends AppCompatActivity {
 
             try{
                 url = new URL(urls[0]);
-                http = (HttpURLConnection) url.openConnection();
+                http = (HttpURLConnection) url.openConnection(); //Initializing the connection
 
                 InputStream in = http.getInputStream();
                 InputStreamReader reader = new InputStreamReader(in);
                 int data = reader.read();
 
                 while( data != -1){
-                    char current = (char) data;
-                    result += current;
+                    char current = (char) data; //reading the data from the scrap api
+                    result += current; //appending the data
                     data = reader.read();
 
                 }
@@ -58,15 +58,15 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
 
-            return result;
+            return result; //returning the object
         }
 
 
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(String s) { //Retrieving and formatting the JSON objects
             super.onPostExecute(s);
 
             try {
-                JSONObject json = new JSONObject(s);
+                JSONObject json = new JSONObject(s); //creating a new instance of a json object
                 b_Rate=json.getInt("buy_dude");
                 s_Rate=json.getInt("sell_dude");
                 BuyView= findViewById(R.id.textView);
