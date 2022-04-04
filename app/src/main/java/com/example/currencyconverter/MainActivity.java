@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 InputStreamReader reader = new InputStreamReader(in);
                 int data = reader.read();
 
-                while( data != -1){
+                while( data != -1){ //will continue reading data as long as its valid
                     char current = (char) data; //reading the data from the scrap api
                     result += current; //appending the data
                     data = reader.read();
