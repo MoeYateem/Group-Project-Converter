@@ -109,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         String url = "http://10.21.128.147/mobile/scrap.php"; //Linking to the first API that retrieves data from Lirarate
         DownloadTask first_api = new DownloadTask();//Initializing connection to it
-        first_api.execute(url);
-        String Url_API = "http://10.21.128.147/mobile/api2.php";
-        API_Add do_it = new API_Add();
+        first_api.execute(url); //Retrieving the JSON objects to the frontend
+        String Url_API = "http://10.21.128.147/mobile/api2.php";//Linking to the second API that sends data to the database
+        API_Add do_it = new API_Add();//Initializing connection to this API
         String str = "amount ,currency ,rate";
         do_it.execute(Url_API, str);
 
@@ -121,12 +121,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onClickConvert(View view) {
+    public void onClickConvert(View view) { //A function for the button that converts
         TextView conversionTextView = findViewById(R.id.output);
 
         EditText lbpEditText = findViewById(R.id.lbp_edit_text);
         EditText usdEditText = findViewById(R.id.usd_edit_text);
-        if (!lbpEditText.getText().toString().equals("")) {
+        if (!lbpEditText.getText().toString().equals("")) { //Checks if there is input in the LBP section
             String lbpValue = lbpEditText.getText().toString();
             BigDecimal usd = new BigDecimal(Double.parseDouble(lbpValue) / b_Rate);
             conversionTextView.setText(lbpValue + "LBP = " + String.valueOf(usd) + "$");
