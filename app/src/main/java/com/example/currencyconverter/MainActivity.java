@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject json = new JSONObject(s);
                 b_Rate=json.getInt("buy_dude");
+
                 Log.i("blackMarketHigh", "" + b_Rate);
                 Log.i("blackMarketLow", "" + s_Rate);
             } catch (Exception e) {
@@ -80,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
         DownloadTask first_api = new DownloadTask();
         first_api.execute(url);
         BuyView= findViewById(R.id.textView);
-//        BuyView.setText(b_Rate);
+
+
+
     }
 
 
