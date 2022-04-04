@@ -13,8 +13,8 @@
 
     <EditText
         android:id="@+id/lbp_edit_text"
-        android:layout_width="332dp"
-        android:layout_height="41dp"
+        android:layout_width="165dp"
+        android:layout_height="46dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.245"
