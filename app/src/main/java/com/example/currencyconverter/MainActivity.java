@@ -29,10 +29,11 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     TextView BuyView;
     TextView SellView;
+    int b_Rate;
+    int s_Rate;
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
-        int b_Rate;
-        int s_Rate;
+
         protected String doInBackground(String... urls){
             String result = "";
             URL url;
