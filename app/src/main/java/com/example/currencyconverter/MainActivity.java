@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         URL url;
         @Override
         protected String doInBackground(String... params) {
-            String urlString = params[0]; // URL to call
+            String urlString = params[0];
             String data = params[1];
             OutputStream out = null;
             try {
