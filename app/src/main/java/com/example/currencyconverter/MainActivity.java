@@ -68,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject json = new JSONObject(s);
                 b_Rate=json.getInt("buy_dude");
                 s_Rate=json.getInt("sell_dude");
+                BuyView= findViewById(R.id.textView);
+                SellView=findViewById(R.id.textView2);
+                BuyView.setText(b_Rate);
+                SellView.setText(s_Rate);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -105,10 +109,7 @@ public class MainActivity extends AppCompatActivity {
         String url = "http://10.21.128.147/mobile/scrap.php";
         DownloadTask first_api = new DownloadTask();
         first_api.execute(url);
-        BuyView= findViewById(R.id.textView);
-        SellView=findViewById(R.id.textView2);
-        BuyView.setText(b_rate);
-        SellView.setText(s_rate);
+
 
 
     }
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickConvert(View view) {
         TextView conversionTextView = findViewById(R.id.output);
+
         EditText lbpEditText = findViewById(R.id.lbp_edit_text);
         EditText usdEditText = findViewById(R.id.usd_edit_text);
         if (!lbpEditText.getText().toString().equals("")) {
