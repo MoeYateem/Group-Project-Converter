@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 URL url = new URL(urlString);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("POST");
+                con.setRequestMethod("Post");
                 out = new BufferedOutputStream(con.getOutputStream());
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
                 writer.write(data);
@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String url = "http://10.21.128.147/mobile/scrap.php";
-        DownloadTask first_api = new DownloadTask();
+        String url = "http://10.21.128.147/mobile/scrap.php"; //Linking to the first API that retrieves data from Lirarate
+        DownloadTask first_api = new DownloadTask();//Initializing connection to it
         first_api.execute(url);
         String Url_API = "http://10.21.128.147/mobile/api2.php";
         API_Add do_it = new API_Add();
