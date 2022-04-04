@@ -134,12 +134,13 @@ public class MainActivity extends AppCompatActivity {
         else if(lbpEditText.getText().toString().equals("") && usdEditText.getText().toString().equals("")) {
             Toast.makeText(this, "Please enter a value", Toast.LENGTH_SHORT).show();
             conversionTextView.setText("");
+            //sends a toast if the user tried pressing the button without any input
         }
         else {
 
             String usdValue = usdEditText.getText().toString();
             BigDecimal lbp = new BigDecimal(Double.parseDouble(usdValue) * s_Rate);
-            conversionTextView.setText(usdValue + "$ = " + String.valueOf(lbp) + "LBP");
+            conversionTextView.setText(usdValue + "$ = " + String.valueOf(lbp) + "LBP"); //Converts to LBP
         }
     }
 }
