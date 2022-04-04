@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     TextView BuyView;
+    TextView SellView;
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
         int b_Rate;
@@ -66,9 +67,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject json = new JSONObject(s);
                 b_Rate=json.getInt("buy_dude");
-
-                Log.i("blackMarketHigh", "" + b_Rate);
-                Log.i("blackMarketLow", "" + s_Rate);
+                s_Rate=json.getInt("sell_dude");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -80,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
         HttpURLConnection con;
         URL url;
         @Override
-        protected String doInBackground(String... params) {
-            String urlString = params[0];
-            String data = params[1];
+        protected String doInBackground(String... p) {
+            String urlString = p[0];
+            String data = p[1];
             OutputStream out = null;
             try {
                 URL url = new URL(urlString);
@@ -91,9 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 out = new BufferedOutputStream(con.getOutputStream());
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
                 writer.write(data);
-                writer.flush();
-                writer.close();
-                out.close();
                 con.connect();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -106,12 +102,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         String url = "http://10.21.128.147/mobile/scrap.php";
         DownloadTask first_api = new DownloadTask();
         first_api.execute(url);
         BuyView= findViewById(R.id.textView);
-        //BuyView.setText();
+        SellView=findViewById(R.id.textView2);
+        BuyView.setText(b_rate);
+        SellView.setText(s_rate);
 
 
     }
