@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 JSONObject json = new JSONObject(s); //creating a new instance of a json object
-                b_Rate=json.getInt("buy_dude");
-                s_Rate=json.getInt("sell_dude");
+                b_Rate=json.getInt("buy_dude"); //Hooking the returned jsonobjects to a java variable
+                s_Rate=json.getInt("sell_dude"); //same here
                 BuyView= findViewById(R.id.textView);
                 SellView=findViewById(R.id.textView2);
-                BuyView.setText(b_Rate);
+                BuyView.setText(b_Rate);//Appending the values to the text views for the user to view
                 SellView.setText(s_Rate);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    public class API_Add extends AsyncTask<String, String, String> {
+    public class API_Add extends AsyncTask<String, String, String> { //HTTP/URL connection function for the database API
         HttpURLConnection http;
         HttpURLConnection con;
         URL url;
